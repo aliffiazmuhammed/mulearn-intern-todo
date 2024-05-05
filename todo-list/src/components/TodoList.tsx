@@ -1,20 +1,31 @@
-import { TodoItem } from "./TodoItem"
-import '../App.css'
+import React from 'react';
+import { TodoItem } from './TodoItem';
+import '../App.css';
 
-export function TodoList({ todos, toggleTodo, deleteTodo }) {
-  return (
-    <ul className="list">
-      {todos.length === 0 && "No Todos"}
-      {todos.map(todo => {
-        return (
-          <TodoItem
-            {...todo}
-            key={todo.id}
-            toggleTodo={toggleTodo}
-            deleteTodo={deleteTodo}
-          />
-        )
-      })}
-    </ul>
-  )
+interface Todo {
+    id: string;
+    title: string;
+    completed: boolean;
+}
+
+interface TodoListProps {
+    todos: Todo[];
+    toggleTodo: (id: string, completed: boolean) => void;
+    deleteTodo: (id: string) => void;
+}
+
+export function TodoList({ todos, toggleTodo, deleteTodo }: TodoListProps) {
+    return (
+        <ul className="list">
+            {todos.length === 0 && <li>No Todos</li>}
+            {todos.map(todo => (
+                <TodoItem
+                    key={todo.id}
+                    {...todo}
+                    toggleTodo={toggleTodo}
+                    deleteTodo={deleteTodo}
+                />
+            ))}
+        </ul>
+    );
 }
