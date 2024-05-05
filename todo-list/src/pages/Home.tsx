@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NewTodoForm } from '../components/NewTodoForm';
 import { TodoList } from '../components/TodoList';
 import { useNavigate } from 'react-router-dom';
