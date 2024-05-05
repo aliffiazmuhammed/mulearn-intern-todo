@@ -24,7 +24,7 @@ function Signup() {
         if (values.username && values.password && values.email) {
             if (!localStorage.getItem(values.username)) {
                 localStorage.setItem(values.username, JSON.stringify(values));
-                navigate('/signin');
+                navigate('/mulearn-intern-todo/signin');
             } else {
                 alert('User already registered');
             }
@@ -60,7 +60,7 @@ function Signup() {
                     />
                 </div>
                 <button className="btn" type="submit">Sign up</button>
-                <span>Already have an account?<Link to="/signin"> SIGN IN</Link></span>
+                <span>Already have an account?<Link to="/mulearn-intern-todo/signin"> SIGN IN</Link></span>
             </form>
         </div>
     );

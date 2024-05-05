@@ -25,7 +25,7 @@ function SignIn() {
                 const user = JSON.parse(storedUser) as FormValues;
                 if (values.password === user.password) {
                     localStorage.setItem('loggedInUser', values.username);
-                    navigate('/');
+                    navigate('/mulearn-intern-todo');
                 } else {
                     alert('Password does not match');
                 }
@@ -59,7 +59,7 @@ function SignIn() {
                     />
                 </div>
                 <button className="btn" type="submit">Sign in</button>
-                <span>Don't have an account?<Link to="/signup"> REGISTER</Link></span>
+                <span>Don't have an account?<Link to="/mulearn-intern-todo/signup"> REGISTER</Link></span>
             </form>
         </div>
     );

@@ -12,40 +12,38 @@ interface Todo {
 function Home() {
     const navigate = useNavigate();
     const username = localStorage.getItem('loggedInUser');
+    
     useEffect(() => {
         if (!username) {
-            navigate('/signin');
+            navigate('/mulearn-intern-todo/signin');
         }
-    }, []);
+    }, [navigate, username]);
 
     const [todos, setTodos] = useState<Todo[]>(() => {
-        const localValue = localStorage.getItem(username || '');
-        if (localValue == null) return [];
+        const localValue = localStorage.getItem("ITEMS");
+        if (localValue === null) return [];
         return JSON.parse(localValue);
     });
 
     useEffect(() => {
-        localStorage.setItem(username || '', JSON.stringify(todos));
+        if (username) {
+            localStorage.setItem("ITEMS", JSON.stringify(todos));
+        }
     }, [todos, username]);
 
     function addTodo(title: string) {
-        setTodos(currentTodos => [
-            ...currentTodos,
-            { id: crypto.randomUUID(), title, completed: false },
-        ]);
+        const newTodo: Todo = { id: crypto.randomUUID(), title, completed: false };
+        setTodos(prevTodos => [...prevTodos, newTodo]);
     }
 
     function toggleTodo(id: string, completed: boolean) {
-        setTodos(currentTodos => currentTodos.map(todo => {
-            if (todo.id === id) {
-                return { ...todo, completed };
-            }
-            return todo;
-        }));
+        setTodos(prevTodos =>
+            prevTodos.map(todo => (todo.id === id ? { ...todo, completed } : todo))
+        );
     }
 
     function deleteTodo(id: string) {
-        setTodos(currentTodos => currentTodos.filter(todo => todo.id !== id));
+        setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
     }
 
     return (
@@ -58,3 +56,4 @@ function Home() {
 }
 
 export default Home;
+
